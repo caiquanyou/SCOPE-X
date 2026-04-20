@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# PyTorch
+*.pth
+*.pt
+*.ckpt
+checkpoints/
+
+# Conda
+.envs/
+.conda/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Project outputs - Training results and model checkpoints
+result*/
+Para_Path*/
+*.png
+*.csv
+*.log
+wandb/
+
+# Archives and large data files
+*.rar
+*.zip
+*.tar.gz
+*.h5ad
+*.h5
+*.anndata
+
+# Claude Code
+.claude/
+
+# OS
+Thumbs.db
+.DS_Store
