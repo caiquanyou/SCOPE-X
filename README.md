@@ -309,3 +309,56 @@ If you encounter issues not covered in this guide:
 **Last Updated**: April 14, 2026
 **Version**: V3.5.0 with Group Compression (Fixed)
 **Status**: ✅ Ready for experimentation
+
+## 🧩 Downstream Tasks (New)
+
+This repository now includes a unified downstream pipeline:
+
+- `run_downstream.py`: single entrypoint for five tasks
+  - `translation` (RNA↔ATAC)
+  - `representation` (cell embedding/classification)
+  - `retrieval` (cross-modal retrieval)
+  - `linkpred` (peak-gene link prediction)
+  - `perturb` (perturbation response)
+- `downstream_dataset.py`: manifest loading and task datasets
+- `downstream_heads.py`: task-specific heads
+- `downstream_losses.py`: task losses
+- `DOWNSTREAM_TASKS.md`: checklist + full data dictionary
+- `data/downstream_manifest.template.json`: manifest template
+
+Quick start:
+
+```bash
+python run_downstream.py \
+  --task representation \
+  --manifest data/downstream_manifest.template.json \
+  --split train \
+  --epochs 1 \
+  --batch_size 1 \
+  --num_classes 2
+```
+
+## 🧪 Downstream Multi-Test Script (aligned with pretraining format)
+
+New script: `run_downstream_tests.py`
+
+It directly reuses pretraining data format and pipeline (`load_multiple_samples` + `MaskedDataset`) and reports:
+- RNA→ATAC translation proxy MSE
+- ATAC→RNA translation proxy MSE
+- Cross-modal retrieval (R@1 / R@5)
+- CLS alignment cosine
+- ATAC open/close accuracy
+
+Example:
+
+```bash
+python run_downstream_tests.py \
+  --config_json /path/to/your_config.json \
+  --checkpoint /path/to/model_epochX.pth \
+  --eval_cells 256 \
+  --batch_size 16 \
+  --save_json result/downstream_test_metrics.json
+```
+
+`--config_json` should contain the same path fields used in `run_token1_test.py`:
+`base_dir`, `ENSG2token_path`, `gene_cluster_info_path`, `gene_position_info_path`, `peak2token_path`, `peak_cluster_path`, `idf_path`, `loaded_dict`.
