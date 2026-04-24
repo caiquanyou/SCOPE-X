@@ -309,3 +309,31 @@ If you encounter issues not covered in this guide:
 **Last Updated**: April 14, 2026
 **Version**: V3.5.0 with Group Compression (Fixed)
 **Status**: ✅ Ready for experimentation
+
+## 🧩 Downstream Tasks (New)
+
+This repository now includes a unified downstream pipeline:
+
+- `run_downstream.py`: single entrypoint for five tasks
+  - `translation` (RNA↔ATAC)
+  - `representation` (cell embedding/classification)
+  - `retrieval` (cross-modal retrieval)
+  - `linkpred` (peak-gene link prediction)
+  - `perturb` (perturbation response)
+- `downstream_dataset.py`: manifest loading and task datasets
+- `downstream_heads.py`: task-specific heads
+- `downstream_losses.py`: task losses
+- `DOWNSTREAM_TASKS.md`: checklist + full data dictionary
+- `data/downstream_manifest.template.json`: manifest template
+
+Quick start:
+
+```bash
+python run_downstream.py \
+  --task representation \
+  --manifest data/downstream_manifest.template.json \
+  --split train \
+  --epochs 1 \
+  --batch_size 1 \
+  --num_classes 2
+```

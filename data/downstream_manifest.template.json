@@ -1,0 +1,29 @@
+[
+  {
+    "cell_id": "cell_0001",
+    "sample_id": "GRCh38.M00001",
+    "pair_id": "pair_0001",
+    "split": "train",
+    "cell_type": 0,
+    "batch": "run_1",
+    "rna_tokens": [
+      [101, 2.3, 1, 34, 0, 1],
+      [205, 1.1, 2, 45, 0, 2]
+    ],
+    "atac_tokens": [
+      [210001, 0.6, 1, 2068, 1, 1],
+      [210099, 0.0, 2, 2301, 1, 2]
+    ],
+    "candidate_edges": [
+      [210001, 101, 23000],
+      [210099, 205, 120000]
+    ],
+    "edge_labels": [1, 0],
+    "perturb": {
+      "target": "GATA1",
+      "type": "KO"
+    },
+    "delta_rna": [0.2, -0.1],
+    "delta_atac": [0.05, -0.02]
+  }
+]
